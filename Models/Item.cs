@@ -27,6 +27,10 @@ namespace ToDoList.Models
     {
       return _instances;
     }
+    public int GetId()
+    {
+      return _id;
+    }
     public static Item Find(int searchId)
     {
       return _instances[searchId-1];
