@@ -8,10 +8,11 @@ namespace ToDoList.Controllers
     public class ItemsController : Controller
 
     {
-      [HttpGet("/items")]
+        [HttpGet("/items")]
         public ActionResult Index()
         {
             List<Item> allItems = Item.GetAll();
+            Console.WriteLine("List is how many items long?" + allItems.Count);
             return View(allItems);
         }
 
@@ -25,10 +26,16 @@ namespace ToDoList.Controllers
         public ActionResult Create()
         {
           Item newItem = new Item (Request.Form["new-item"]);
-          newItem.Save();
           List<Item> allItems = Item.GetAll();
           return View("Index", allItems);
           // return View();
+        }
+
+        [HttpGet("/items/{id}")]
+        public ActionResult Details(int id)
+        {
+            Item item = Item.Find(id);
+            return View(item);
         }
 
         [HttpPost("/items/delete")]
